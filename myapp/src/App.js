@@ -7,20 +7,27 @@ function App() {
 
   const [data,setdata] = useState([])
   const [originaldata,setoriginaldata] = useState([])
-  const [nameFilter,setNameFilter] = useState("")
-  const [ageFilter,setAgeFilter] = useState("")
+  const [firstnameFilter,setFirstNameFilter] = useState("")
+  const [lastnameFilter,setLastNameFilter] = useState("")
+  const [phoneFilter,setPhoneFilter] = useState("")
 
   const inputChanged = (e,inputType) =>{
-    if(inputType=='name'){
-      setNameFilter(e.target.value);
+    if(inputType=='firstname'){
+      setFirstNameFilter(e.target.value);
       setdata(originaldata.filter(item=>{
-        return item.name.includes(e.target.value);
+        return item.firstname.includes(e.target.value);
       }))
     }
-    else if(inputType=='age'){
-      setAgeFilter(e.target.value);
+    else if(inputType=='lastname'){
+      setLastNameFilter(e.target.value);
       setdata(originaldata.filter(item=>{
-        return item.age.includes(e.target.value);
+        return item.lastname.includes(e.target.value);
+      }))
+    }
+    else if(inputType=='phone'){
+      setPhoneFilter(e.target.value);
+      setdata(originaldata.filter(item=>{
+        return item.phone.includes(e.target.value);
       }))
     }
   }
@@ -35,17 +42,20 @@ function App() {
 
   return (
     <div className="App">
-      <h1>TrakInvest Assessment</h1>
+      <h1>Assessment</h1>
      <table className="center">
      <tr>
-	    <th><input type="text" placeholder="Name" value={nameFilter} onChange={e=>inputChanged(e,"name")}/></th>
-	    <th><input type="text" placeholder="Age" value={ageFilter} onChange={e=>inputChanged(e,"age")}/></th>
+	    <th><input type="text" placeholder="First name" value={firstnameFilter} onChange={e=>inputChanged(e,"firstname")}/></th>
+      <th><input type="text" placeholder="Last name" value={lastnameFilter} onChange={e=>inputChanged(e,"lastname")}/></th>
+	    <th><input type="text" placeholder="Phone" value={phoneFilter} onChange={e=>inputChanged(e,"phone")}/></th>
     </tr>
     {data.map(item =>{
       return (
 	<tr>
-    <td>{item.name}</td>
-		<td>{item.age}</td>
+    <td>{item.firstname}</td>
+    <td>{item.lastname}</td>
+		<td>{item.phone}</td>
+
 	</tr>)
 })
 }
